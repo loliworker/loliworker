@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+keywords=${1:?}
+temp_dir=$(mktemp -d)
+googleimagesdownload -k "$keywords" -l 1 -o "$temp_dir"
+result=$(find "$temp_dir" -type f)
+python ascii2.py "$result"
+rm -r "$temp_dir"
